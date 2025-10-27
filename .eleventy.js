@@ -1,7 +1,10 @@
 // .eleventy.js
-module.exports = function (eleventyConfig) {
+const yaml = require("js-yaml");
+
+module.exports = function eleventyConfigFunction(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/styles");
   eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
 
   eleventyConfig.addCollection("kapitel", function (collectionApi) {
     return collectionApi.getFilteredByGlob("src/kapitel-*.md").sort((a, b) => {
@@ -13,6 +16,7 @@ module.exports = function (eleventyConfig) {
     pathPrefix: "/Teamentwicklung/",
     dir: {
       input: "src",
+      dat: "_data",
       includes: "includes",
       output: "docs",
     },

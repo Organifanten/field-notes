@@ -1,0 +1,28 @@
+---
+layout: layout.njk
+title: Level 12
+---
+<section class="levels">
+  <h1>Level 12</h1>
+  <span>Level 12 ist ein Jahr DIY Teamentwicklung. <br>Schafft ihr alle Aufgaben bis Level 12?</span>
+
+  {% for level in level12.levels %}
+    <div class="level">
+      <h2>{{ level.title }}</h2>
+      <ol>
+        {% for task in level.tasks %}
+          <li class="task">
+            <button class="task-title" data-index="{{ loop.index0 }}">
+              {{ task.title }}
+            </button>
+            <p class="task-details" hidden>
+              {{ task.detail }}
+            </p>
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
+  {% endfor %}
+</section>
+
+<script src="{{ '/assets/level-toggle.js' | url }}" defer></script>
